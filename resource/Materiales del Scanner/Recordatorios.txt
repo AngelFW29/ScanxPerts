@@ -1,0 +1,4 @@
+-Interfaz para Desktop
+- Modulo(excel_writer): No debe haber un excel predeterminado
+
+-Empaquetar la aplicación

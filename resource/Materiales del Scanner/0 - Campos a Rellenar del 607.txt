@@ -1,0 +1,44 @@
+1	RNC/Cédula o Pasaporte
+
+2	Tipo Identificación
+
+3	Número Comprobante Fiscal
+
+4	Número Comprobante Fiscal Modificado
+
+5	Tipo de Ingreso
+
+6	Fecha Comprobante
+
+7	Fecha de Retención
+
+8	Monto Facturado
+
+9	ITBIS Facturado
+
+10	ITBIS Retenido por Terceros
+
+17	Efectivo
+
+18	Cheque/ Transferencia/ Depósito
+
+19	Tarjeta Débito/Crédito
+
+20	Venta a Crédito
+
+
+
+
+******************************************
+1 RNC/Cédula o Pasaporte
+2 Tipo Identificación
+3 Número Comprobante Fiscal
+4 Número Comprobante Fiscal Modificado
+5 Tipo de Ingreso: En este campo lo rellenaras con esto por defecto:  01 - Ingresos por Operaciones (No Financieros)
+6 Fecha Comprobante 
+7 Fecha de Retención
+AAAAMMDD este es el formato por defecto de las fechas. aunque desde el output están colocado en este formato por defecto.
+8 Monto Facturado
+9 ITBIS Facturado
+10 ITBIS Retenido por Terceros
+18 Cheque/ Transferencia/ Depósito
