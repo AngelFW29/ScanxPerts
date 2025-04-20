@@ -16,6 +16,42 @@ from excel_writer import (
 )
 
 
+class ToolTip:
+    def __init__(self, widget, text):
+        self.widget = widget
+        self.text = text
+        self.tooltip = None
+        widget.bind("<Enter>", self.show_tooltip)
+        widget.bind("<Leave>", self.hide_tooltip)
+
+    def show_tooltip(self, event=None):
+        x = y = 0
+        x = self.widget.winfo_pointerx() + 10
+        y = self.widget.winfo_pointery() + 10
+
+        self.tooltip = tk.Toplevel(self.widget)
+        self.tooltip.wm_overrideredirect(True)
+        self.tooltip.wm_geometry(f"+{x}+{y}")
+
+        label = tk.Label(
+            self.tooltip,
+            text=self.text,
+            background="#333",
+            foreground="white",
+            relief="solid",
+            borderwidth=1,
+            padx=5,
+            pady=2,
+            font=("Segoe UI", 10),
+        )
+        label.pack()
+
+    def hide_tooltip(self, event=None):
+        if self.tooltip:
+            self.tooltip.destroy()
+            self.tooltip = None
+
+
 # Inicializar tema y modo
 ctk.set_appearance_mode("dark")  #  "light" o "system"
 ctk.set_default_color_theme("blue")  # "green", "dark-blue"
@@ -162,54 +198,6 @@ def seleccionar_opcion_guardado():
     boton_existente.pack(pady=5)
 
 
-# VENTANA PRINCIPAL
-ventana = ctk.CTk()
-ventana.title("Procesador de Facturas")
-ventana.geometry("700x500")
-
-# Etiqueta de encabezado
-encabezado = ctk.CTkLabel(ventana, text="Procesador de Facturas", font=("Segoe UI", 24))
-encabezado.pack(pady=20)
-
-
-# Crear frame para los botones
-frame_botones = ctk.CTkFrame(ventana)
-frame_botones.pack(pady=20)
-
-# Botón para convertir PDF a Imagen
-boton_pdf_to_img = ctk.CTkButton(
-    frame_botones,
-    text="Convertir PDF a Imagen",
-    command=convertir_pdf_a_imagen,
-    width=200,
-)
-boton_pdf_to_img.pack(side="left", padx=10)
-
-# Botón para seleccionar Imagen
-boton_seleccionar = ctk.CTkButton(
-    frame_botones,
-    text="Seleccionar Imagen",
-    command=seleccionar_y_procesar_archivo,
-    width=200,
-)
-boton_seleccionar.pack(side="left", padx=10)
-
-# Botón para guardar
-boton_guardar = ctk.CTkButton(
-    frame_botones,
-    text="Guardar en Excel",
-    command=seleccionar_opcion_guardado,
-    width=200,
-)
-boton_guardar.pack(side="left", padx=10)
-
-
-# Área de texto para resultados
-resultado_texto = ctk.CTkTextbox(ventana, width=500, height=250, font=("Consolas", 12))
-resultado_texto.pack(side="left", padx=10, pady=10)
-resultado_texto.configure(state="disabled")  # Deshabilitado para evitar edición
-
-
 # Limpiar pantalla
 def limpiar_pantalla():
     resultado_texto.configure(state="normal")
@@ -217,5 +205,58 @@ def limpiar_pantalla():
     resultado_texto.configure(state="disabled")
 
 
-# Ejecutar
+# ---------------------- INTERFAZ ------------------------
+ventana = ctk.CTk()
+ventana.title("Procesador de Facturas")
+ventana.geometry("800x550")
+ventana.resizable(False, False)
+
+# Título principal
+ctk.CTkLabel(ventana, text="Procesador de Facturas", font=("Segoe UI", 26)).pack(
+    pady=20
+)
+
+# Frame para botones
+frame_botones = ctk.CTkFrame(ventana)
+frame_botones.pack(pady=10)
+
+boton_convertir_pdf = ctk.CTkButton(
+    frame_botones,
+    text="Convertir PDF a Imagen",
+    command=convertir_pdf_a_imagen,
+    width=200,
+)
+boton_convertir_pdf.grid(row=0, column=0, padx=10, pady=5)
+
+boton_seleccionar_imagen = ctk.CTkButton(
+    frame_botones,
+    text="Seleccionar Imagen",
+    command=seleccionar_y_procesar_archivo,
+    width=200,
+)
+boton_seleccionar_imagen.grid(row=0, column=1, padx=10, pady=5)
+
+boton_guardar_excel = ctk.CTkButton(
+    frame_botones,
+    text="Guardar en Excel",
+    command=seleccionar_opcion_guardado,
+    width=200,
+)
+boton_guardar_excel.grid(row=0, column=2, padx=10, pady=5)
+
+# Añadir ToolTips a los botones
+ToolTip(boton_convertir_pdf, "Convierte un archivo PDF en imágenes.")
+ToolTip(boton_seleccionar_imagen, "Seleccione una factura en formato JPG.")
+ToolTip(boton_guardar_excel, "Elija dónde desea guardar los datos extraídos.")
+
+# Frame para resultados con scrollbar
+frame_resultado = ctk.CTkFrame(ventana)
+frame_resultado.pack(pady=20, fill="both", expand=True)
+
+resultado_texto = ctk.CTkTextbox(
+    frame_resultado, width=740, height=300, font=("Consolas", 20)
+)
+resultado_texto.pack(side="left", fill="both", expand=True, padx=10, pady=10)
+resultado_texto.configure(state="disabled")
+
 ventana.mainloop()
