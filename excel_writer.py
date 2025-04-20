@@ -73,17 +73,19 @@ def aplicar_formato_celda(cell, key, value):
         cell.value = value  # Por si acaso
 
 
-# Guardar los datos en el Excel Existente
 def guardar_en_excel_existente(data):
     try:
-        write_data_to_excel(data)
+        exito = write_data_to_excel(data)
+        if not exito:
+            return  # No mostrar nada si falló
 
         global invoice_data
-        invoice_data = None  # Limpieza de memoria
+        invoice_data = None
 
         messagebox.showinfo(
             "Éxito", "Los datos han sido guardados en el Excel existente."
         )
+
     except Exception as e:
         messagebox.showerror("Error", f"Ocurrió un error al guardar los datos:\n{e}")
 
@@ -143,14 +145,11 @@ def write_data_to_excel(data):
 
         if not excel_path:
             messagebox.showinfo("Cancelado", "No se seleccionó ningún archivo.")
-            return
+            return False
 
         workbook = openpyxl.load_workbook(excel_path)
-
-        # Usar la primera hoja activa del archivo
         sheet = workbook.active
 
-        # Encuentra la primera fila vacía
         row = 4
         while sheet[f"B{row}"].value:
             row += 1
@@ -158,12 +157,16 @@ def write_data_to_excel(data):
         for key, col in COLUMN_MAP.items():
             value = data.get(key, "")
             cell = sheet[f"{col}{row}"]
-            cell.value = value
             aplicar_formato_celda(cell, key, value)
 
         workbook.save(excel_path)
         print(f"✅ Datos escritos en la fila {row} del archivo Excel.")
+        return True
 
-    except Exception as e:
-        print(f"❌ Ocurrió un error al guardar los datos: {e}")
-        messagebox.showerror("Error", f"Ocurrió un error al guardar los datos:\n{e}")
+    except PermissionError:
+        print(f"❌ Ocurrió un error al guardar los datos")
+        messagebox.showerror(
+            "Archivo en uso",
+            "No se puede guardar en el archivo porque está abierto.\nCierra el archivo de Excel e intenta de nuevo.",
+        )
+        return False
