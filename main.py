@@ -76,6 +76,8 @@ def guardar_en_excel():
             return
         write_data_to_excel(invoice_data)
         messagebox.showinfo("Éxito", "Los datos han sido guardados en el Excel.")
+        limpiar_pantalla()
+        invoice_data.clear()
     except Exception as e:
         messagebox.showerror("Error", f"Ocurrió un error al guardar los datos: {e}")
 
@@ -129,6 +131,8 @@ def seleccionar_opcion_guardado():
         ventana_opciones.destroy()
         if invoice_data:
             guardar_en_nuevo_excel(invoice_data)
+            limpiar_pantalla()
+            invoice_data.clear()
         else:
             messagebox.showwarning("Aviso", "No hay datos para guardar.")
 
@@ -136,6 +140,8 @@ def seleccionar_opcion_guardado():
         ventana_opciones.destroy()
         if invoice_data:
             guardar_en_excel_existente(invoice_data)
+            limpiar_pantalla()
+            invoice_data.clear()
         else:
             messagebox.showwarning("Aviso", "No hay datos para guardar.")
 
@@ -202,6 +208,14 @@ boton_guardar.pack(side="left", padx=10)
 resultado_texto = ctk.CTkTextbox(ventana, width=500, height=250, font=("Consolas", 12))
 resultado_texto.pack(side="left", padx=10, pady=10)
 resultado_texto.configure(state="disabled")  # Deshabilitado para evitar edición
+
+
+# Limpiar pantalla
+def limpiar_pantalla():
+    resultado_texto.configure(state="normal")
+    resultado_texto.delete(1.0, tk.END)
+    resultado_texto.configure(state="disabled")
+
 
 # Ejecutar
 ventana.mainloop()
