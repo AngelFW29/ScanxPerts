@@ -93,12 +93,13 @@ def guardar_en_excel_existente(data):
 # Crear y guardar nuevo archivo desde plantilla
 def guardar_en_nuevo_excel(data):
     try:
-        plantilla_path = r"resource\Herramienta de Envío de Datos 607.xlsx"
+        plantilla_path = r"resource\Plantilla_de_Formato_607.xlsx"
 
         nuevo_archivo_path = filedialog.asksaveasfilename(
             defaultextension=".xlsx",
             filetypes=[("Excel Files", "*.xlsx")],
             title="Guardar nuevo Excel como...",
+            initialfile="Herramienta de Envío de Datos 607",
         )
 
         if not nuevo_archivo_path:
