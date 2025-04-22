@@ -1,5 +1,0 @@
-customtkinter
-Pillow
-pytesseract
-openpyxl
-pdf2image
