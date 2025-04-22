@@ -60,9 +60,7 @@ def process_invoice(image_path):
     itbis_facturado = clean_number(extract_value(itbis_pattern, extracted_text))
     retencion = clean_number(extract_value(retencion_pattern, extracted_text))
 
-    if ncf.startswith("B01"):
-        ncf_modificado = "No aplica para NCF tipo B01"
-    elif (ncf.startswith("B04") or ncf.startswith("B03")) and not ncf_modificado:
+    if (ncf.startswith("B03") or ncf.startswith("B04")) and not ncf_modificado:
         ncf_modificado = correct_ncf_format(
             extract_value(r"B[Oo0I1]{2}\d+", extracted_text, "")
         )
