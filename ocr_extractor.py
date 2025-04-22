@@ -24,9 +24,9 @@ def process_invoice(image_path):
 
     # Prueba
     print("Texto OCR EXTRAIDO\n", extracted_text)
-
+    # REGEX
     rnc_pattern = r"RNC:\s*(\d+)"
-    ncf_pattern = r"NCF\s*(?:de N\. de D\.)?:?\s*(B\d{2}\d+|\bBO1\d+)"
+    ncf_pattern = r"NCF\s*(?:de N\. de [DC]\.)?:?\s*(B\d{2}\d+|\bBO1\d+)"
     ncf_mod_pattern = r"NCF:\s*Modificada\s*(B[Oo0I1]{2}\d+)"
     fecha_pattern = r"FECHA:\s*(\d{2}/\d{2}/\d{4})"
     monto_pattern = r"SUBTOTAL[\s\]]*\s*\$\s*([\d,]+\.\d+)"
@@ -62,7 +62,7 @@ def process_invoice(image_path):
 
     if ncf.startswith("B01"):
         ncf_modificado = "No aplica para NCF tipo B01"
-    elif (ncf.startswith("B03") or ncf.startswith("B04")) and not ncf_modificado:
+    elif (ncf.startswith("B04") or ncf.startswith("B03")) and not ncf_modificado:
         ncf_modificado = correct_ncf_format(
             extract_value(r"B[Oo0I1]{2}\d+", extracted_text, "")
         )

@@ -24,8 +24,11 @@ def correct_extracted_text(text):
         "RENTENGIONES": "RETENCIONES",
         "RENTENCIONES": "RETENCIONES",
         "RETENGIONES": "RETENCIONES",
+        "SUBTOTALES|": "SUBTOTALES",
         "¢": "$",
         "!": "|",
+        "§": "$",
+        "‘$": "$",
     }
     for wrong, right in corrections.items():
         text = text.replace(wrong, right)
