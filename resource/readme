@@ -1,0 +1,35 @@
+# ScanxPerts
+
+ScanxPerts es una herramienta de escritorio desarrollada en Python que permite procesar facturas escaneadas en formato PDF o imagen. Extrae automáticamente los datos clave mediante OCR, los organiza y los exporta a una hoja de Excel según el formato requerido por la norma 607 de la DGII.
+
+---
+
+## 🚀 Funcionalidades
+
+- Carga de facturas en formato `.pdf`, `.png` o `.jpg`
+- Extracción automática de datos clave mediante OCR
+- Soporte para formatos B01, B03 y B04
+- Exportación directa a Excel con formato para texto, numero y fecha
+- Detección y separación de ITBIS facturado y retenido
+- Selección del archivo de Excel destino mediante un buscador visual
+- Limpieza automática del formulario tras cada envío
+- Integración con Poppler para manejo de PDFs
+- Interfaz gráfica desarrollada con P
+
+---
+
+## 📁 Estructura del Proyecto
+├── main.py # Punto de entrada 
+├── config.py # Configuraciones generales 
+├── ocr_extractor.py # Lógica de extracción OCR 
+├── data_formatter.py # Formateo y validación de datos 
+├── excel_writer.py # Escritura en Excel 
+├── file_selector.py # Selección de archivo Excel 
+├── pdf_to_image.py # Conversión PDF -> imagen 
+│ 
+├── resource/ 
+│ 
+├── bin/ # Recursos necesarios (ej: Poppler) 
+├── sample_607/  # Facturas de prueba y plantilla 
+├── requirements.txt # Dependencias del proyecto 
+└── readme.md # (Este archivo)
