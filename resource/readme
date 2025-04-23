@@ -14,7 +14,7 @@ ScanxPerts es una herramienta de escritorio desarrollada en Python que permite p
 - Selección del archivo de Excel destino mediante un buscador visual
 - Limpieza automática del formulario tras cada envío
 - Integración con Poppler para manejo de PDFs
-- Interfaz gráfica desarrollada con P
+- Interfaz gráfica desarrollada con Tkinter y customtkinter  
 
 ---
 
