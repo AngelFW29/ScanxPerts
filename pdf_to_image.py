@@ -1,12 +1,13 @@
 # pdf_to_image.py
 from pdf2image import convert_from_path
 import os
+from tkinter import filedialog, messagebox
 
 # Ruta de Poppler (ajústala si cambia de ubicación)
 POPPLER_PATH = r"C:\Users\Usuario\OneDrive\Escritorio\ScanxPerts\resource\bin"
 
 
-def pdf_to_images(pdf_path, output_folder="resource/"):
+def pdf_to_images(pdf_path, output_folder=None):
     """
     Convierte un PDF en una o más imágenes JPG.
 
@@ -17,6 +18,14 @@ def pdf_to_images(pdf_path, output_folder="resource/"):
     Returns:
         list: Lista de rutas de las imágenes generadas.
     """
+    if output_folder is None:
+        output_folder = filedialog.askdirectory(
+            title="Seleccionar carpeta para guardar imágenes"
+        )
+        if not output_folder:
+            messagebox.showinfo("Cancelado", "No se seleccionó carpeta de guardado.")
+            return []
+
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
