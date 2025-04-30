@@ -19,17 +19,24 @@ ScanxPerts es una herramienta de escritorio desarrollada en Python que permite p
 ---
 
 ## 📁 Estructura del Proyecto
-├── main.py # Punto de entrada 
-├── config.py # Configuraciones generales 
-├── ocr_extractor.py # Lógica de extracción OCR 
-├── data_formatter.py # Formateo y validación de datos 
-├── excel_writer.py # Escritura en Excel 
-├── file_selector.py # Selección de archivo Excel 
-├── pdf_to_image.py # Conversión PDF -> imagen 
-│ 
-├── resource/ 
-│ 
-├── bin/ # Recursos necesarios (ej: Poppler) 
-├── sample_607/  # Facturas de prueba y plantilla 
-├── requirements.txt # Dependencias del proyecto 
-└── readme.md # (Este archivo)
+ScanxPerts/
+├── main.py                  # Punto de entrada (interfaz CustomTkinter)
+├── config.py                # Configuración de rutas (Tesseract, recursos)
+├── ocr_extractor.py         # Extracción OCR con pytesseract
+├── data_formatter.py        # Limpieza/formateo de datos (NCF, montos)
+├── excel_writer.py          # Escritura en Excel (plantillas 607)
+├── file_selector.py         # Diálogos para seleccionar archivos
+├── pdf_to_image.py          # Conversión PDF→imagen (con Poppler/bin)
+│
+├── Tesseract-OCR/           # Binarios de Tesseract (todo incluido!)
+│   ├── tesseract.exe        # Ejecutable principal
+│   ├── tessdata/            # Datos de idiomas
+│   └── ...                  # Otros archivos necesarios
+│
+├── resource/                # Recursos críticos
+│   ├── bin/                 # Poppler (pdftoppm.exe + DLLs mínimas)
+│   ├── sample_data_607/     # Facturas de prueba + plantilla Excel
+│   └── ico_scanx_perts.ico  # Icono de la aplicación
+│
+├── requirements.txt         # Dependencias (pytesseract, pdf2image, etc.)
+└── readme.md               # Guía de uso y detalles técnicos
