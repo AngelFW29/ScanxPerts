@@ -207,7 +207,7 @@ def limpiar_pantalla():
 
 # ---------------------- INTERFAZ ------------------------
 ventana = ctk.CTk()
-ventana.title("ScanxPerts")
+ventana.title("ScanXperts")
 ventana.geometry("800x550")
 ventana.resizable(False, False)
 
