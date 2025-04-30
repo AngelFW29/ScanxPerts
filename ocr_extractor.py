@@ -5,6 +5,7 @@ from datetime import datetime
 from data_formatter import clean_number, correct_ncf_format, correct_extracted_text
 from config import TESSERACT_CMD, OCR_CONFIG
 
+# La ruta al ejecutable de Tesseract
 pytesseract.pytesseract_cmd = TESSERACT_CMD
 
 
