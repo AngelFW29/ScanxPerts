@@ -1,11 +1,10 @@
 # Excel_writer
-import openpyxl
+from config import resource_path
 from openpyxl.utils import get_column_letter
 from datetime import datetime
 import shutil
+import openpyxl
 from tkinter import filedialog, messagebox
-import os
-import sys
 
 EXCEL_PATH = r"resource\Herramienta de Envío de Datos 607.xlsx"
 EXCEL_SHEET = "DATOS"
@@ -88,15 +87,6 @@ def guardar_en_excel_existente(data):
 
     except Exception as e:
         messagebox.showerror("Error", f"Ocurrió un error al guardar los datos:\n{e}")
-
-
-def resource_path(relative_path):
-    """Obtiene el path absoluto, compatible tanto en desarrollo como en el .exe"""
-    try:
-        base_path = sys._MEIPASS
-    except AttributeError:
-        base_path = os.path.abspath(".")
-    return os.path.join(base_path, relative_path)
 
 
 # Crear y guardar nuevo archivo desde plantilla
