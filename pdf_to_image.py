@@ -2,9 +2,11 @@
 from pdf2image import convert_from_path
 import os
 from tkinter import filedialog, messagebox
+from config import resource_path
 
 # Ruta de Poppler (ajústala si cambia de ubicación)
-POPPLER_PATH = r"C:\Users\Usuario\OneDrive\Escritorio\ScanxPerts\resource\bin"
+# POPPLER_PATH = r"resource\bin"
+POPPLER_PATH = resource_path("resource/bin")
 
 
 def pdf_to_images(pdf_path, output_folder=None):
@@ -45,13 +47,3 @@ def pdf_to_images(pdf_path, output_folder=None):
         image_paths.append(image_path)
 
     return image_paths
-
-
-# Prueba local del módulo (solo para debug, no usar en producción)
-# if __name__ == "__main__":
-#     pdf_file = "resource/Materiales del Scanner/Facturas - B01.pdf"
-#     images = pdf_to_images(pdf_file)
-#     if images:
-#         print(f"Conversión exitosa: {len(images)} páginas convertidas 🚀")
-#     else:
-#         print("No se pudo convertir el PDF.")

@@ -2,15 +2,11 @@
 import customtkinter as ctk
 import tkinter as tk
 from tkinter import filedialog, messagebox
-from openpyxl.utils import get_column_letter
 from ocr_extractor import process_invoice
 from file_selector import seleccionar_imagen
 from pdf_to_image import pdf_to_images
 from excel_writer import (
     write_data_to_excel,
-    COLUMN_MAP,
-    COLUMN_FORMATS,
-    aplicar_formato_celda,
     guardar_en_nuevo_excel,
     guardar_en_excel_existente,
 )
@@ -246,7 +242,7 @@ boton_guardar_excel.grid(row=0, column=2, padx=10, pady=5)
 
 # Añadir ToolTips a los botones
 ToolTip(boton_convertir_pdf, "Convierte un archivo PDF en imágenes.")
-ToolTip(boton_seleccionar_imagen, "Seleccione una factura en formato JPG.")
+ToolTip(boton_seleccionar_imagen, "Seleccione una imagen o archivo PDF de factura.")
 ToolTip(boton_guardar_excel, "Elija dónde desea guardar los datos extraídos.")
 
 # Frame para resultados con scrollbar

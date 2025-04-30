@@ -6,7 +6,7 @@ from data_formatter import clean_number, correct_ncf_format, correct_extracted_t
 from config import TESSERACT_CMD, OCR_CONFIG
 
 # La ruta al ejecutable de Tesseract
-pytesseract.tesseract_cmd = TESSERACT_CMD
+pytesseract.pytesseract.tesseract_cmd = TESSERACT_CMD
 
 
 def extract_value(pattern, text, default=""):
@@ -23,8 +23,6 @@ def process_invoice(image_path):
     extracted_text = pytesseract.image_to_string(gray, config=OCR_CONFIG)
     extracted_text = correct_extracted_text(extracted_text)
 
-    # Prueba
-    print("Texto OCR EXTRAIDO\n", extracted_text)
     # REGEX
     rnc_pattern = r"RNC:\s*(\d+)"
     ncf_pattern = r"NCF\s*(?:de N\. de [DC]\.)?:?\s*(B\d{2}\d+|\bBO1\d+)"

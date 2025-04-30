@@ -1,6 +1,5 @@
-# Excel_writer
+# excel_writer
 from config import resource_path
-from openpyxl.utils import get_column_letter
 from datetime import datetime
 import shutil
 import openpyxl

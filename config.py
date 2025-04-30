@@ -7,11 +7,10 @@ OCR_CONFIG = "--psm 6"
 
 def resource_path(relative_path):
     try:
-        base_path = sys._MEIPASS  # Al ejecutar el .exe
+        base_path = sys._MEIPASS  # Para el ejecutable
     except Exception:
-        base_path = os.path.abspath(".")  # Al ejecutar como script
+        base_path = os.path.abspath(".")  # Para desarrollo
     return os.path.join(base_path, relative_path)
 
 
-# TESSERACT_CMD = resource_path("tesseract/tesseract.exe")
-TESSERACT_CMD = resource_path("resource/Tesseract-OCR/tesseract.exe")
+TESSERACT_CMD = resource_path("Tesseract-OCR/tesseract.exe")  
